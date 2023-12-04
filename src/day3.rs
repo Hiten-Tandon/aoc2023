@@ -4,6 +4,7 @@ fn numify(mat: &mut [Box<[char]>], row: usize, col: usize) -> u64 {
     if row >= mat.len() || col >= mat[0].len() || !mat[row][col].is_ascii_digit() {
         return 0;
     }
+
     let mut res = 0;
     let mut li = col;
     let mut ri = col + 1;

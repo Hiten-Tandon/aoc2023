@@ -19,8 +19,7 @@ impl FromStr for Game {
         };
         s.split(',')
             .map(|x| {
-                x.trim()
-                    .split_whitespace()
+                x.split_whitespace()
                     .collect_tuple::<(&str, &str)>()
                     .unwrap()
             })
