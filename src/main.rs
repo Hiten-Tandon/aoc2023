@@ -3,16 +3,19 @@ use std::{
     io::{stdin, Read},
     time::Instant,
 };
+
 pub mod day1;
 pub mod day2;
 pub mod day3;
 pub mod day4;
+pub mod day5;
 
 use crate::{
     day1::{sum_correct_purified_data, sum_purified_data},
     day2::{get_possible_games, get_power_games},
     day3::{sum_gear_ratios, sum_parts},
     day4::{count_total_cards, get_winning_points},
+    day5::{get_lowest_seed_location, get_lowest_seed_location_from_ranges},
 };
 
 fn main() -> Result<(), ()> {
@@ -37,6 +40,8 @@ fn main() -> Result<(), ()> {
         "3 2" => println!("{}", sum_gear_ratios(&f_cont)),
         "4 1" => println!("{}", get_winning_points(&f_cont)),
         "4 2" => println!("{}", count_total_cards(&f_cont)),
+        "5 1" => println!("{}", get_lowest_seed_location(&f_cont)),
+        "5 2" => println!("{}", get_lowest_seed_location_from_ranges(&f_cont)),
         _ => unreachable!(),
     }
 
