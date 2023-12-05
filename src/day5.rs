@@ -4,7 +4,7 @@ use itertools::Itertools;
 
 pub fn get_lowest_seed_location(data: &str) -> u64 {
     let mut lines = data.lines();
-    let mut chunks: Vec<Vec<Box<str>>> = vec![];
+    let mut chunks: Vec<Box<[Box<str>]>> = vec![];
 
     while lines.clone().count() != 0 {
         chunks.push(
