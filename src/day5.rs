@@ -104,9 +104,13 @@ pub fn get_lowest_seed_location_from_ranges(data: &str) -> u64 {
             } else if let Some((k, v, r)) =
                 map.iter().copied().find(|&(k, _, r)| s <= k && e >= k + r)
             {
-                curr_vals.push((s, k));
+                if s != k {
+                    curr_vals.push((s, k));
+                }
                 temp.push((v, v + r));
-                curr_vals.push((k + r, e));
+                if e != k + r {
+                    curr_vals.push((k + r, e));
+                }
             } else if let Some((k, v, r)) = map
                 .iter()
                 .copied()
