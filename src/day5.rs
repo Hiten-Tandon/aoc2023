@@ -11,7 +11,7 @@ pub fn get_lowest_seed_location(data: &str) -> u64 {
             lines
                 .by_ref()
                 .take_while(|x| !x.is_empty())
-                .map(|x| Box::from(x))
+                .map(Box::from)
                 .collect(),
         )
     }
@@ -29,7 +29,7 @@ pub fn get_lowest_seed_location(data: &str) -> u64 {
 
     while let Some(map) = chunks.pop() {
         let map: Box<[(Range<u64>, u64, u64)]> = map
-            .into_iter()
+            .iter()
             .skip(1)
             .map(|x| {
                 x.split_ascii_whitespace()
@@ -43,15 +43,13 @@ pub fn get_lowest_seed_location(data: &str) -> u64 {
 
         for i in 0..curr_vals.len() {
             if let Some((_, k, v)) = map
-                .iter()
-                .cloned()
-                .find(|(k_range, _, _)| k_range.contains(&curr_vals[i]))
+                .iter().find(|&(k_range, _, _)| k_range.contains(&curr_vals[i])).cloned()
             {
                 curr_vals[i] = curr_vals[i] - k + v;
             }
         }
     }
-    curr_vals.into_iter().min().copied().unwrap()
+    curr_vals.iter().min().copied().unwrap()
 }
 
 pub fn get_lowest_seed_location_from_ranges(data: &str) -> u64 {
@@ -63,7 +61,7 @@ pub fn get_lowest_seed_location_from_ranges(data: &str) -> u64 {
             lines
                 .by_ref()
                 .take_while(|x| !x.is_empty())
-                .map(|x| Box::from(x))
+                .map(Box::from)
                 .collect(),
         )
     }

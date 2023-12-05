@@ -6,10 +6,10 @@ pub fn get_winning_points(input: &str) -> u64 {
     input
         .lines()
         .map(|line| {
-            line.split(":")
+            line.split(':')
                 .nth(1)
                 .unwrap()
-                .split("|")
+                .split('|')
                 .map(|x| {
                     x.split_ascii_whitespace()
                         .map(str::parse::<u8>)
@@ -31,10 +31,10 @@ pub fn count_total_cards(input: &str) -> u64 {
     input
         .lines()
         .map(|line| {
-            line.split(":")
+            line.split(':')
                 .nth(1)
                 .unwrap()
-                .split("|")
+                .split('|')
                 .map(|x| {
                     x.split_ascii_whitespace()
                         .map(str::parse::<u8>)
@@ -54,5 +54,5 @@ pub fn count_total_cards(input: &str) -> u64 {
                 .take(count)
                 .for_each(|e| *e += mul)
         });
-    dp.into_iter().sum()
+    dp.iter().sum()
 }
