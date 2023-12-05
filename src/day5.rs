@@ -101,13 +101,26 @@ pub fn get_lowest_seed_location_from_ranges(data: &str) -> u64 {
         while let Some((s, e)) = curr_vals.pop() {
             if let Some((k, v, _)) = map.iter().copied().find(|&(k, _, r)| s >= k && e <= k + r) {
                 temp.push((s - k + v, e - k + v));
+            } else if let Some((k, v, r)) =
+                map.iter().copied().find(|&(k, _, r)| s <= k && e >= k + r)
+            {
+                curr_vals.push((s, k));
+                temp.push((v, v + r));
+                curr_vals.push((k + r, e));
             } else if let Some((k, v, r)) = map
                 .iter()
                 .copied()
                 .find(|&(k, _, r)| (k..(k + r)).contains(&s))
             {
-                temp.push((s - k + v, v + r - 1));
+                temp.push((s - k + v, v + r));
                 curr_vals.push((k + r, e));
+            } else if let Some((k, v, _)) = map
+                .iter()
+                .copied()
+                .find(|&(k, _, r)| ((k + 1)..=(k + r)).contains(&e))
+            {
+                temp.push((v, e - k + v));
+                curr_vals.push((s, k));
             } else {
                 temp.push((s, e));
             }
