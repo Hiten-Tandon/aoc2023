@@ -9,6 +9,7 @@ pub mod day2;
 pub mod day3;
 pub mod day4;
 pub mod day5;
+pub mod day6;
 
 use crate::{
     day1::{sum_correct_purified_data, sum_purified_data},
@@ -16,6 +17,7 @@ use crate::{
     day3::{sum_gear_ratios, sum_parts},
     day4::{count_total_cards, get_winning_points},
     day5::{get_lowest_seed_location, get_lowest_seed_location_from_ranges},
+    day6::{count_ways_to_win, count_ways_to_win_if_one_race},
 };
 
 fn main() -> Result<(), ()> {
@@ -42,6 +44,8 @@ fn main() -> Result<(), ()> {
         "4 2" => println!("{}", count_total_cards(&f_cont)),
         "5 1" => println!("{}", get_lowest_seed_location(&f_cont)),
         "5 2" => println!("{}", get_lowest_seed_location_from_ranges(&f_cont)),
+        "6 1" => println!("{}", count_ways_to_win(&f_cont)),
+        "6 2" => println!("{}", count_ways_to_win_if_one_race(&f_cont)),
         _ => unreachable!(),
     }
 

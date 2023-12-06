@@ -1,4 +1,5 @@
 use onig::*;
+use rayon::{iter::ParallelIterator, str::ParallelString};
 
 pub fn sum_purified_data(impure_data: &str) -> u64 {
     impure_data
@@ -27,16 +28,15 @@ pub fn sum_correct_purified_data(impure_data: &str) -> u64 {
     };
 
     impure_data
-        .lines()
+        .par_lines()
         .map(|line| {
             let v: Vec<_> = regex.captures_iter(line).collect();
-            //println!("{v:?}");
             let first = v.first().unwrap();
             let last = v.last().unwrap();
 
             (
-                f(first.iter().collect::<Vec<_>>()[1].unwrap()),
-                f(last.iter().collect::<Vec<_>>()[1].unwrap()),
+                f(first.iter().nth(1).unwrap().unwrap()),
+                f(last.iter().nth(1).unwrap().unwrap()),
             )
         })
         .map(|(a, b)| a * 10 + b)

@@ -43,7 +43,9 @@ pub fn get_lowest_seed_location(data: &str) -> u64 {
 
         for i in 0..curr_vals.len() {
             if let Some((_, k, v)) = map
-                .iter().find(|&(k_range, _, _)| k_range.contains(&curr_vals[i])).cloned()
+                .iter()
+                .find(|&(k_range, _, _)| k_range.contains(&curr_vals[i]))
+                .cloned()
             {
                 curr_vals[i] = curr_vals[i] - k + v;
             }
@@ -127,7 +129,16 @@ pub fn get_lowest_seed_location_from_ranges(data: &str) -> u64 {
                 temp.push((s, e));
             }
         }
-        curr_vals = temp;
+
+        temp.sort_unstable();
+        for val in temp {
+            if !curr_vals.is_empty() && val.0 <= curr_vals.last().unwrap().1 {
+                curr_vals.last_mut().unwrap().1 = val.1;
+            } else {
+                curr_vals.push(val);
+            }
+        }
     }
+
     curr_vals.into_iter().map(|(a, _)| a).min().unwrap()
 }
