@@ -63,10 +63,11 @@ pub fn get_total_winnings_with_joker(set_bid_pairs: &str) -> u64 {
                     }
                     (acc << 4) | code
                 });
-            *counts.iter_mut().max().unwrap() += j_count;
-            counts.sort_by_key(|x| !x);
             if j_count == 5 {
                 counts[0] = j_count;
+            } else {
+                *counts.iter_mut().max().unwrap() += j_count;
+                counts.sort_by_key(|x| !x);
             }
             let p = match counts {
                 [5, ..] => 6,
