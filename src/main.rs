@@ -12,6 +12,7 @@ pub mod day5;
 pub mod day6;
 pub mod day7;
 pub mod day7_v2;
+pub mod day8;
 
 use crate::{
     day1::{sum_correct_purified_data, sum_purified_data},
@@ -21,6 +22,7 @@ use crate::{
     day5::{get_lowest_seed_location, get_lowest_seed_location_from_ranges},
     day6::{count_ways_to_win, count_ways_to_win_if_one_race},
     day7_v2::{get_total_winnings, get_total_winnings_with_joker},
+    day8::{get_ghost_path_length, get_path_length},
 };
 
 fn main() -> Result<(), ()> {
@@ -51,6 +53,8 @@ fn main() -> Result<(), ()> {
         "6 2" => println!("{}", count_ways_to_win_if_one_race(&f_cont)),
         "7 1" => println!("{}", get_total_winnings(&f_cont)),
         "7 2" => println!("{}", get_total_winnings_with_joker(&f_cont)),
+        "8 1" => println!("{}", get_path_length(&f_cont)),
+        "8 2" => println!("{}", get_ghost_path_length(&f_cont)),
         _ => unreachable!(),
     }
 
