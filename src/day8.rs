@@ -1,5 +1,4 @@
-use itertools::Itertools;
-use num::Integer;
+use {itertools::Itertools, num::Integer};
 
 fn encode(s: &str) -> u32 {
     s.bytes()
@@ -51,6 +50,8 @@ pub fn get_path_length(input: &str) -> u64 {
 pub fn get_ghost_path_length(input: &str) -> u64 {
     let mut curr_nodes: Vec<u32> = vec![];
     let mut lines = input.lines();
+    let mut map: [[u32; 2]; 32768] = [[0; 2]; 32768];
+
     let instructions = lines
         .by_ref()
         .next()
@@ -59,7 +60,6 @@ pub fn get_ghost_path_length(input: &str) -> u64 {
         .map(|x| if x == 'L' { 0_usize } else { 1_usize })
         .collect::<Box<[_]>>();
 
-    let mut map: [[u32; 2]; 32768] = [[0; 2]; 32768];
     lines
         .skip(1)
         .filter_map(|line| line.split(" = ").collect_tuple())

@@ -13,6 +13,7 @@ pub mod day6;
 pub mod day7;
 pub mod day7_v2;
 pub mod day8;
+pub mod day9;
 
 use crate::{
     day1::{sum_correct_purified_data, sum_purified_data},
@@ -23,6 +24,7 @@ use crate::{
     day6::{count_ways_to_win, count_ways_to_win_if_one_race},
     day7_v2::{get_total_winnings, get_total_winnings_with_joker},
     day8::{get_ghost_path_length, get_path_length},
+    day9::{oasis_value_extrapolator, reverse_oasis_value_extrapolator},
 };
 
 fn main() -> Result<(), ()> {
@@ -55,6 +57,8 @@ fn main() -> Result<(), ()> {
         "7 2" => println!("{}", get_total_winnings_with_joker(&f_cont)),
         "8 1" => println!("{}", get_path_length(&f_cont)),
         "8 2" => println!("{}", get_ghost_path_length(&f_cont)),
+        "9 1" => println!("{}", oasis_value_extrapolator(&f_cont)),
+        "9 2" => println!("{}", reverse_oasis_value_extrapolator(&f_cont)),
         _ => unreachable!(),
     }
 
