@@ -5,6 +5,7 @@ use std::{
 };
 
 pub mod day1;
+pub mod day10;
 pub mod day2;
 pub mod day3;
 pub mod day4;
@@ -17,6 +18,7 @@ pub mod day9;
 
 use crate::{
     day1::{sum_correct_purified_data, sum_purified_data},
+    day10::{count_tiles_enclosed_by_loop, find_loop_length},
     day2::{get_possible_games, get_power_games},
     day3::{sum_gear_ratios, sum_parts},
     day4::{count_total_cards, get_winning_points},
@@ -59,6 +61,8 @@ fn main() -> Result<(), ()> {
         "8 2" => println!("{}", get_ghost_path_length(&f_cont)),
         "9 1" => println!("{}", oasis_value_extrapolator(&f_cont)),
         "9 2" => println!("{}", reverse_oasis_value_extrapolator(&f_cont)),
+        "10 1" => println!("{}", find_loop_length(&f_cont)),
+        "10 2" => println!("{}", count_tiles_enclosed_by_loop(&f_cont)),
         _ => unreachable!(),
     }
 

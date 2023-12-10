@@ -1,6 +1,3 @@
-use onig::*;
-use rayon::{iter::ParallelIterator, str::ParallelString};
-
 pub fn sum_purified_data(impure_data: &str) -> u64 {
     impure_data
         .lines()
@@ -10,35 +7,18 @@ pub fn sum_purified_data(impure_data: &str) -> u64 {
         .sum()
 }
 
-const NUMS: [&str; 9] = [
-    "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-];
-
 pub fn sum_correct_purified_data(impure_data: &str) -> u64 {
-    let regex: Regex =
-        Regex::new((String::from("(?=(") + &NUMS.join("|") + "|\\d))").as_str()).unwrap();
-
-    let f = |x: &str| -> u64 {
-        x.parse::<u64>().unwrap_or_else(|_| {
-            NUMS.iter()
-                .position(|&y| x == y)
-                .unwrap_or(usize::max_value()) as u64
-                + 1_u64
-        })
-    };
-
-    impure_data
-        .par_lines()
-        .map(|line| {
-            let v: Vec<_> = regex.captures_iter(line).collect();
-            let first = v.first().unwrap();
-            let last = v.last().unwrap();
-
-            (
-                f(first.iter().nth(1).unwrap().unwrap()),
-                f(last.iter().nth(1).unwrap().unwrap()),
-            )
-        })
-        .map(|(a, b)| a * 10 + b)
-        .sum()
+    sum_purified_data(
+        impure_data
+            .replace("one", "o1e")
+            .replace("two", "t2o")
+            .replace("three", "t3e")
+            .replace("four", "f4r")
+            .replace("five", "f5e")
+            .replace("six", "s6x")
+            .replace("seven", "s7n")
+            .replace("eight", "e8t")
+            .replace("nine", "n9e")
+            .as_ref(),
+    )
 }
