@@ -1,17 +1,17 @@
 pub fn sum_min_dists(grid: &str) -> u64 {
-    let grid: Box<[Box<[char]>]> = grid.lines().map(|row| row.chars().collect()).collect();
     let mut galaxies: Vec<(i64, i64)> = vec![];
-    let mut row_set: Box<[i64]> = grid.iter().map(|_| 1).collect();
-    let mut col_set: Box<[i64]> = grid[0].iter().map(|_| 1).collect();
-    for (ri, row) in grid.iter().enumerate() {
-        for (ci, ele) in row.iter().copied().enumerate() {
-            if ele == '#' {
+    let mut row_set: Box<[i64]> = grid.lines().map(|_| 1).collect();
+    let mut col_set: Box<[i64]> = grid.lines().next().unwrap().chars().map(|_| 1).collect();
+
+    grid.lines().enumerate().for_each(|(ri, row)| {
+        row.char_indices()
+            .filter(|&(_, e)| e == '#')
+            .for_each(|(ci, _)| {
                 galaxies.push((ri as _, ci as _));
                 row_set[ri] = 0;
                 col_set[ci] = 0;
-            }
-        }
-    }
+            })
+    });
 
     for i in 1..row_set.len() {
         row_set[i] += row_set[i - 1];
@@ -35,19 +35,26 @@ pub fn sum_min_dists(grid: &str) -> u64 {
 }
 
 pub fn sum_min_dists_if_galaxy_much_older(grid: &str) -> u64 {
-    let grid: Box<[Box<[char]>]> = grid.lines().map(|row| row.chars().collect()).collect();
     let mut galaxies: Vec<(i64, i64)> = vec![];
-    let mut row_set: Box<[i64]> = grid.iter().map(|_| 999999).collect();
-    let mut col_set: Box<[i64]> = grid[0].iter().map(|_| 999999).collect();
-    for (ri, row) in grid.iter().enumerate() {
-        for (ci, ele) in row.iter().copied().enumerate() {
-            if ele == '#' {
+
+    let mut row_set: Box<[i64]> = grid.lines().map(|_| 999999).collect();
+    let mut col_set: Box<[i64]> = grid
+        .lines()
+        .next()
+        .unwrap()
+        .chars()
+        .map(|_| 999999)
+        .collect();
+
+    grid.lines().enumerate().for_each(|(ri, row)| {
+        row.char_indices()
+            .filter(|&(_, e)| e == '#')
+            .for_each(|(ci, _)| {
                 galaxies.push((ri as _, ci as _));
                 row_set[ri] = 0;
                 col_set[ci] = 0;
-            }
-        }
-    }
+            })
+    });
 
     for i in 1..row_set.len() {
         row_set[i] += row_set[i - 1];
