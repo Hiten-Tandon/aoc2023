@@ -1,3 +1,5 @@
+use itertools::Itertools;
+
 pub fn sum_min_dists(grid: &str) -> u64 {
     let mut galaxies: Vec<(i64, i64)> = vec![];
     let mut row_set: Box<[i64]> = grid.lines().map(|_| 1).collect();
@@ -25,13 +27,11 @@ pub fn sum_min_dists(grid: &str) -> u64 {
         x.1 += col_set[x.1 as usize];
     });
 
-    let mut res = 0;
-    for i in 0..galaxies.len() {
-        for j in (i + 1)..galaxies.len() {
-            res += (galaxies[i].0 - galaxies[j].0).abs() + (galaxies[i].1 - galaxies[j].1).abs();
-        }
-    }
-    res as _
+    galaxies
+        .into_iter()
+        .tuple_combinations()
+        .map(|((x1, y1), (x2, y2))| (x1 - x2).abs() + (y1 - y2).abs())
+        .sum::<i64>() as _
 }
 
 pub fn sum_min_dists_if_galaxy_much_older(grid: &str) -> u64 {
@@ -68,11 +68,9 @@ pub fn sum_min_dists_if_galaxy_much_older(grid: &str) -> u64 {
         x.1 += col_set[x.1 as usize];
     });
 
-    let mut res = 0;
-    for i in 0..galaxies.len() {
-        for j in (i + 1)..galaxies.len() {
-            res += (galaxies[i].0 - galaxies[j].0).abs() + (galaxies[i].1 - galaxies[j].1).abs();
-        }
-    }
-    res as _
+    galaxies
+        .into_iter()
+        .tuple_combinations()
+        .map(|((x1, y1), (x2, y2))| (x1 - x2).abs() + (y1 - y2).abs())
+        .sum::<i64>() as _
 }
