@@ -8,6 +8,8 @@ pub mod day1;
 pub mod day10;
 pub mod day11;
 pub mod day12;
+pub mod day13;
+pub mod day14;
 pub mod day2;
 pub mod day3;
 pub mod day4;
@@ -23,6 +25,10 @@ use crate::{
     day10::{count_tiles_enclosed_by_loop, find_loop_length},
     day11::{sum_min_dists, sum_min_dists_if_galaxy_much_older},
     day12::{possible_configs_of_broken_stuff, possible_configs_of_copied_broken_stuff},
+    day13::{evaluate_point_of_incidence, evaluate_point_of_incidence_after_removing_smudge},
+    day14::{
+        calculate_load_on_north_beams_after_cycles, calculate_load_on_north_beams_after_tilting,
+    },
     day2::{get_possible_games, get_power_games},
     day3::{sum_gear_ratios, sum_parts},
     day4::{count_total_cards, get_winning_points},
@@ -71,6 +77,14 @@ fn main() -> Result<(), ()> {
         "11 2" => println!("{}", sum_min_dists_if_galaxy_much_older(&f_cont)),
         "12 1" => println!("{}", possible_configs_of_broken_stuff(&f_cont)),
         "12 2" => println!("{}", possible_configs_of_copied_broken_stuff(&f_cont)),
+
+        "13 1" => println!("{}", evaluate_point_of_incidence(&f_cont)),
+        "13 2" => println!(
+            "{}",
+            evaluate_point_of_incidence_after_removing_smudge(&f_cont)
+        ),
+        "14 1" => println!("{}", calculate_load_on_north_beams_after_tilting(&f_cont)),
+        "14 2" => println!("{}", calculate_load_on_north_beams_after_cycles(&f_cont)),
         _ => unreachable!(),
     }
 

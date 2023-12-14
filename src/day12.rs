@@ -41,6 +41,7 @@ pub fn possible_configs_of_broken_stuff(data: &str) -> u64 {
     let mut cache = HashMap::new();
     data.lines()
         .map(|line| {
+            cache.clear();
             let (broken_part, ok_part) = line.split_ascii_whitespace().collect_tuple().unwrap();
             let ok_part: Box<[usize]> = ok_part
                 .split(',')
