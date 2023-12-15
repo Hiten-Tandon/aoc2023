@@ -4,7 +4,16 @@ use std::{
     time::Instant,
 };
 
-pub mod day1;
+pub mod day01;
+pub mod day02;
+pub mod day03;
+pub mod day04;
+pub mod day05;
+pub mod day06;
+pub mod day07;
+pub mod day07_v2;
+pub mod day08;
+pub mod day09;
 pub mod day10;
 pub mod day11;
 pub mod day12;
@@ -12,18 +21,17 @@ pub mod day12_v2;
 pub mod day13;
 pub mod day14;
 pub mod day15;
-pub mod day2;
-pub mod day3;
-pub mod day4;
-pub mod day5;
-pub mod day6;
-pub mod day7;
-pub mod day7_v2;
-pub mod day8;
-pub mod day9;
 
 use crate::{
-    day1::{sum_correct_purified_data, sum_purified_data},
+    day01::{sum_correct_purified_data, sum_purified_data},
+    day02::{get_possible_games, get_power_games},
+    day03::{sum_gear_ratios, sum_parts},
+    day04::{count_total_cards, get_winning_points},
+    day05::{get_lowest_seed_location, get_lowest_seed_location_from_ranges},
+    day06::{count_ways_to_win, count_ways_to_win_if_one_race},
+    day07_v2::{get_total_winnings, get_total_winnings_with_joker},
+    day08::{get_ghost_path_length, get_path_length},
+    day09::{oasis_value_extrapolator, reverse_oasis_value_extrapolator},
     day10::{count_tiles_enclosed_by_loop, find_loop_length},
     day11::{sum_min_dists, sum_min_dists_if_galaxy_much_older},
     day12::{possible_configs_of_broken_stuff, possible_configs_of_copied_broken_stuff},
@@ -32,14 +40,6 @@ use crate::{
         calculate_load_on_north_beams_after_cycles, calculate_load_on_north_beams_after_tilting,
     },
     day15::{get_power_of_lenses_after_creating_hashmap, sum_holiday_hash_for_testing_purposes},
-    day2::{get_possible_games, get_power_games},
-    day3::{sum_gear_ratios, sum_parts},
-    day4::{count_total_cards, get_winning_points},
-    day5::{get_lowest_seed_location, get_lowest_seed_location_from_ranges},
-    day6::{count_ways_to_win, count_ways_to_win_if_one_race},
-    day7_v2::{get_total_winnings, get_total_winnings_with_joker},
-    day8::{get_ghost_path_length, get_path_length},
-    day9::{oasis_value_extrapolator, reverse_oasis_value_extrapolator},
 };
 
 fn main() -> Result<(), ()> {
