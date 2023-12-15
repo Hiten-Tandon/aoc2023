@@ -1,5 +1,5 @@
 use itertools::Itertools;
-use std::collections::HashMap;
+use std::{array, collections::HashMap};
 
 fn helper(rep: &str, counts: &[usize], cache: &mut HashMap<(Box<str>, Box<[usize]>), u64>) -> u64 {
     if rep.is_empty() {
@@ -59,7 +59,8 @@ pub fn possible_configs_of_copied_broken_stuff(data: &str) -> u64 {
     data.lines()
         .map(|line| {
             let (broken_part, ok_part) = line.split_ascii_whitespace().collect_tuple().unwrap();
-            let broken_part = [broken_part; 5].join("?");
+            let broken_part: String =
+                array::from_fn::<String, 5, _>(|_| broken_part.split('.').join(".")).join("?");
             let ok_part: Box<[usize]> = [ok_part; 5]
                 .join(",")
                 .split(',')
