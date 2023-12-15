@@ -8,8 +8,10 @@ pub mod day1;
 pub mod day10;
 pub mod day11;
 pub mod day12;
+pub mod day12_v2;
 pub mod day13;
 pub mod day14;
+pub mod day15;
 pub mod day2;
 pub mod day3;
 pub mod day4;
@@ -29,6 +31,7 @@ use crate::{
     day14::{
         calculate_load_on_north_beams_after_cycles, calculate_load_on_north_beams_after_tilting,
     },
+    day15::{get_power_of_lenses_after_creating_hashmap, sum_holiday_hash_for_testing_purposes},
     day2::{get_possible_games, get_power_games},
     day3::{sum_gear_ratios, sum_parts},
     day4::{count_total_cards, get_winning_points},
@@ -85,6 +88,8 @@ fn main() -> Result<(), ()> {
         ),
         "14 1" => println!("{}", calculate_load_on_north_beams_after_tilting(&f_cont)),
         "14 2" => println!("{}", calculate_load_on_north_beams_after_cycles(&f_cont)),
+        "15 1" => println!("{}", sum_holiday_hash_for_testing_purposes(&f_cont)),
+        "15 2" => println!("{}", get_power_of_lenses_after_creating_hashmap(&f_cont)),
         _ => unreachable!(),
     }
 
