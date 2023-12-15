@@ -67,7 +67,7 @@ fn cycle(position_map: &[(usize, usize, RockType)]) -> Box<[(usize, usize, RockT
         }
     }
 
-    position_map.sort_by_key(|&(r, c, _)| (r, c)); //group by column, sort rows by row indicies
+    position_map.sort_by_key(|&(r, c, _)| (r, c));
     let mut cc = 0;
     for (_, c, ele) in position_map.iter_mut() {
         match *ele {
