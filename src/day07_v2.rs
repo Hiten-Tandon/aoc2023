@@ -1,6 +1,6 @@
 use itertools::Itertools;
 
-const CARDS: &'static str = "j23456789TJQKA";
+const CARDS: &str = "j23456789TJQKA";
 fn encode(c: char) -> u32 {
     CARDS.find(c).unwrap() as _
 }

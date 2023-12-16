@@ -116,7 +116,7 @@ pub fn calculate_load_on_north_beams_after_cycles(position_map: &str) -> u64 {
     let mut position_map: Box<[(usize, usize, RockType)]> = position_map
         .lines()
         .enumerate()
-        .map(move |(ri, row)| {
+        .flat_map(move |(ri, row)| {
             format!("#{row}#")
                 .char_indices()
                 .filter_map(move |(ci, x)| {
@@ -128,7 +128,6 @@ pub fn calculate_load_on_north_beams_after_cycles(position_map: &str) -> u64 {
                 })
                 .collect_vec()
         })
-        .flatten()
         .collect();
 
     let mut graph: HashMap<

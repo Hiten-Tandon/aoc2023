@@ -18,13 +18,13 @@ pub fn get_power_of_lenses_after_creating_hashmap(input: &str) -> u64 {
     let mut hash_map: [Vec<(&str, u64)>; 256] = array::from_fn(|_| vec![]);
     input.split(',').filter(|x| !x.is_empty()).for_each(|op| {
         if op.contains('=') {
-            let (key, val) = op.split("=").collect_tuple().unwrap();
+            let (key, val) = op.split('=').collect_tuple().unwrap();
             let hash = holiday_hash_algorithm(key) as usize;
             let val = val.trim().parse::<u64>().unwrap();
             if let Some(p) = hash_map[hash].iter_mut().find(|(k, _)| *k == key) {
                 p.1 = val;
             } else {
-                hash_map[hash].push((key.into(), val));
+                hash_map[hash].push((key, val));
             }
         } else {
             let key = op.split('-').next().unwrap();

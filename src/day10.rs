@@ -113,8 +113,7 @@ impl FromStr for GroundMap {
         .copied()
         .filter_map(|(x, y)| {
             grid.get(x)
-                .map(|r| r.get(y).copied().map(|e| (x, y, e)))
-                .flatten()
+                .and_then(|r| r.get(y).copied().map(|e| (x, y, e)))
         })
         .filter_map(|(x, y, e)| {
             if let Tile::PipeTile(p) = e {
@@ -225,11 +224,12 @@ impl GroundMap {
                             temp.push(Tile::try_from('|').unwrap());
                         }
                         (y, x) => {
-                            y.map(|t| temp.push(t));
+                            if let Some(t) = y { temp.push(t) }
                             temp.push(x);
                         }
                     });
-                let res = temp
+                
+                temp
                     .into_iter()
                     .scan(0, |acc, t| {
                         Some(match t {
@@ -241,8 +241,7 @@ impl GroundMap {
                             _ => 0,
                         })
                     })
-                    .sum::<u64>();
-                res
+                    .sum::<u64>()
             })
             .sum::<u64>()
     }
@@ -254,10 +253,9 @@ pub fn find_loop_length(ground_map: &str) -> u64 {
         .unwrap()
         .get_distances()
         .iter()
-        .map(|x| x.iter())
-        .flatten()
+        .flat_map(|x| x.iter())
         .copied()
-        .filter_map(id)
+        .flatten()
         .max()
         .unwrap()
 }

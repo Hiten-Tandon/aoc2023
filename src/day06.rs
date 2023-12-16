@@ -38,10 +38,10 @@ pub fn count_ways_to_win_if_one_race(dist_time: &str) -> u64 {
     let (tt, d): (f64, f64) = dist_time
         .lines()
         .map(|x| {
-            x.split(":")
+            x.split(':')
                 .nth(1)
                 .unwrap()
-                .replace(" ", "")
+                .replace(' ', "")
                 .parse::<f64>()
                 .unwrap()
         })

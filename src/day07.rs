@@ -147,7 +147,7 @@ pub fn get_total_winnings(set_bid_pairs: &str) -> u64 {
     biddings.sort_unstable();
 
     biddings
-        .into_iter()
+        .iter()
         .enumerate()
         .map(|(i, &(_, bid))| bid * (i + 1) as u64)
         .sum()
@@ -155,7 +155,7 @@ pub fn get_total_winnings(set_bid_pairs: &str) -> u64 {
 
 pub fn get_total_winnings_with_joker(set_bid_pairs: &str) -> u64 {
     let mut biddings: Box<[_]> = set_bid_pairs
-        .replace("J", "j")
+        .replace('J', "j")
         .lines()
         .map(|line| line.split_ascii_whitespace().collect_tuple().unwrap())
         .map(|(hand, bid)| (hand.parse::<Deck>().unwrap(), bid.parse::<u64>().unwrap()))
@@ -164,7 +164,7 @@ pub fn get_total_winnings_with_joker(set_bid_pairs: &str) -> u64 {
     biddings.sort_unstable();
     // println!("{biddings:#?}");
     biddings
-        .into_iter()
+        .iter()
         .enumerate()
         .map(|(i, &(_, bid))| bid * (i + 1) as u64)
         .sum()

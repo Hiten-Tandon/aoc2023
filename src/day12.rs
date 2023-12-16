@@ -15,21 +15,17 @@ fn helper(rep: &str, counts: &[usize], cache: &mut HashMap<(Box<str>, Box<[usize
             res += helper(&rep[1..], counts, cache);
         }
 
-        if rep.starts_with(|x| x == '#' || x == '?') {
-            if counts[0] <= rep.len()
-                && !rep[..counts[0]].contains('.')
-                && (counts[0] == rep.len() || rep.chars().nth(counts[0]) != Some('#'))
-            {
-                res += helper(
-                    if counts[0] == rep.len() {
-                        ""
-                    } else {
-                        &rep[(counts[0] + 1)..]
-                    },
-                    &counts[1..],
-                    cache,
-                );
-            }
+        if rep.starts_with(|x| x == '#' || x == '?') && counts[0] <= rep.len()
+                && !rep[..counts[0]].contains('.') && (counts[0] == rep.len() || rep.chars().nth(counts[0]) != Some('#')) {
+            res += helper(
+                if counts[0] == rep.len() {
+                    ""
+                } else {
+                    &rep[(counts[0] + 1)..]
+                },
+                &counts[1..],
+                cache,
+            );
         }
 
         cache.insert((rep.into(), counts.as_ref().into()), res);
