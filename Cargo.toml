@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 itertools = "0.12.0"
 num = "0.4.1"
+rayon = "1.8.0"
 
 [profile.dev]
 overflow-checks = false

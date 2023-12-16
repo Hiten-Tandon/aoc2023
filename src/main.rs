@@ -20,6 +20,7 @@ pub mod day12;
 pub mod day13;
 pub mod day14;
 pub mod day15;
+pub mod day16;
 
 use crate::{
     day01::{sum_correct_purified_data, sum_purified_data},
@@ -39,6 +40,7 @@ use crate::{
         calculate_load_on_north_beams_after_cycles, calculate_load_on_north_beams_after_tilting,
     },
     day15::{get_power_of_lenses_after_creating_hashmap, sum_holiday_hash_for_testing_purposes},
+    day16::{count_energized_tiles, count_max_energized_tiles},
 };
 
 fn main() -> Result<(), ()> {
@@ -89,6 +91,8 @@ fn main() -> Result<(), ()> {
         "14 2" => println!("{}", calculate_load_on_north_beams_after_cycles(&f_cont)),
         "15 1" => println!("{}", sum_holiday_hash_for_testing_purposes(&f_cont)),
         "15 2" => println!("{}", get_power_of_lenses_after_creating_hashmap(&f_cont)),
+        "16 1" => println!("{}", count_energized_tiles(&f_cont)),
+        "16 2" => println!("{}", count_max_energized_tiles(&f_cont)),
         _ => unreachable!(),
     }
 
