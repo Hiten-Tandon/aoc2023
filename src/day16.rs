@@ -20,24 +20,6 @@ impl Direction {
             Direction::West => (0, -1),
         }
     }
-
-    pub fn turn_90_left(self) -> Self {
-        match self {
-            Direction::North => Direction::East,
-            Direction::South => Direction::West,
-            Direction::East => Direction::South,
-            Direction::West => Direction::North,
-        }
-    }
-
-    pub fn turn_90_right(self) -> Self {
-        match self {
-            Direction::North => Direction::West,
-            Direction::South => Direction::East,
-            Direction::East => Direction::North,
-            Direction::West => Direction::South,
-        }
-    }
 }
 
 pub fn helper(maze: &[Box<[char]>], sr: usize, sc: usize, sd: Direction) -> u64 {
