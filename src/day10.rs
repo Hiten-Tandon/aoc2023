@@ -1,5 +1,5 @@
 use itertools::Itertools;
-use std::{collections::VecDeque, convert::identity as id, str::FromStr};
+use std::{collections::VecDeque, str::FromStr};
 
 type BoxSlice<T> = Box<[T]>;
 

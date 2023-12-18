@@ -21,6 +21,9 @@ pub mod day13;
 pub mod day14;
 pub mod day15;
 pub mod day16;
+pub mod day16_v2;
+pub mod day17;
+pub mod day18;
 
 use crate::{
     day01::{sum_correct_purified_data, sum_purified_data},
@@ -40,7 +43,9 @@ use crate::{
         calculate_load_on_north_beams_after_cycles, calculate_load_on_north_beams_after_tilting,
     },
     day15::{get_power_of_lenses_after_creating_hashmap, sum_holiday_hash_for_testing_purposes},
-    day16::{count_energized_tiles, count_max_energized_tiles},
+    day16_v2::{count_energized_tiles, count_max_energized_tiles},
+    day17::{minimize_crucible_temperature_loss, minimize_stable_crucible_temperature_loss},
+    day18::{colorize_larger_perimeter, colorize_perimeter},
 };
 
 fn main() -> Result<(), ()> {
@@ -93,6 +98,10 @@ fn main() -> Result<(), ()> {
         "15 2" => println!("{}", get_power_of_lenses_after_creating_hashmap(&f_cont)),
         "16 1" => println!("{}", count_energized_tiles(&f_cont)),
         "16 2" => println!("{}", count_max_energized_tiles(&f_cont)),
+        "17 1" => println!("{}", minimize_crucible_temperature_loss(&f_cont)),
+        "17 2" => println!("{}", minimize_stable_crucible_temperature_loss(&f_cont)),
+        "18 1" => println!("{}", colorize_perimeter(&f_cont)),
+        "18 2" => println!("{}", colorize_larger_perimeter(&f_cont)),
         _ => unreachable!(),
     }
 
