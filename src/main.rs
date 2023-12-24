@@ -25,6 +25,11 @@ pub mod day16_v2;
 pub mod day17;
 pub mod day18;
 pub mod day19;
+pub mod day20;
+pub mod day21;
+pub mod day22;
+pub mod day23;
+pub mod day24;
 
 use crate::{
     day01::{sum_correct_purified_data, sum_purified_data},
@@ -48,6 +53,11 @@ use crate::{
     day17::{minimize_crucible_temperature_loss, minimize_stable_crucible_temperature_loss},
     day18::{colorize_larger_perimeter, colorize_perimeter},
     day19::{count_good_part_ids, sum_good_part_ids},
+    day20::{count_low_and_high_pulse_combinations, get_to_rx},
+    day21::{step_counter_for_chad_elf, step_counter_for_elf},
+    day22::count_destructable_blocks,
+    day23::{get_longest_hike_route_length, get_longest_hike_route_length_without_slopes},
+    day24::count_intersections_of_hailstone_trajectories,
 };
 
 fn main() -> Result<(), ()> {
@@ -106,6 +116,14 @@ fn main() -> Result<(), ()> {
         "18 2" => println!("{}", colorize_larger_perimeter(&f_cont)),
         "19 1" => println!("{}", sum_good_part_ids(&f_cont)),
         "19 2" => println!("{}", count_good_part_ids(&f_cont)),
+        "20 1" => println!("{}", count_low_and_high_pulse_combinations(&f_cont)),
+        "20 2" => println!("{}", get_to_rx(&f_cont)),
+        "21 1" => println!("{}", step_counter_for_elf(&f_cont)),
+        "21 2" => println!("{}", step_counter_for_chad_elf(&f_cont)),
+        "22 1" => println!("{}", count_destructable_blocks(&f_cont)),
+        "23 1" => println!("{}", get_longest_hike_route_length(&f_cont)),
+        "23 2" => println!("{}", get_longest_hike_route_length_without_slopes(&f_cont)),
+        "24 1" => println!("{}", count_intersections_of_hailstone_trajectories(&f_cont)),
         _ => unreachable!(),
     }
 

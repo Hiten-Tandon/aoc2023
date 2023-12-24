@@ -1,51 +1,55 @@
-block1, _ = open('19.txt').read().split("\n\n")
+grid = open('23.txt').read().splitlines()
 
-workflows = {}
+start = (0, grid[0].index("."))
+end = (len(grid) - 1, grid[-1].index("."))
 
-for line in block1.splitlines():
-    name, rest = line[:-1].split("{")
-    rules = rest.split(",")
-    workflows[name] = ([], rules.pop())
-    for rule in rules:
-        comparison, target = rule.split(":")
-        key = comparison[0]
-        cmp = comparison[1]
-        n = int(comparison[2:])
-        workflows[name][0].append((key, cmp, n, target))
+points = [start, end]
 
-def count(ranges, name = "in"):
-    if name == "R":
+for r, row in enumerate(grid):
+    for c, ch in enumerate(row):
+        if ch == "#":
+            continue
+        neighbors = 0
+        for nr, nc in [(r - 1, c), (r + 1, c), (r, c - 1), (r, c + 1)]:
+            if 0 <= nr < len(grid) and 0 <= nc < len(grid[0]) and grid[nr][nc] != "#":
+                neighbors += 1
+        if neighbors >= 3:
+            points.append((r, c))
+
+graph = {pt: {} for pt in points}
+
+for sr, sc in points:
+    stack = [(0, sr, sc)]
+    seen = {(sr, sc)}
+
+    while stack:
+        n, r, c = stack.pop()
+        
+        if n != 0 and (r, c) in points:
+            graph[(sr, sc)][(r, c)] = n
+            continue
+
+        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            nr = r + dr
+            nc = c + dc
+            if 0 <= nr < len(grid) and 0 <= nc < len(grid[0]) and grid[nr][nc] != "#" and (nr, nc) not in seen:
+                stack.append((n + 1, nr, nc))
+                seen.add((nr, nc))
+
+seen = set()
+
+def dfs(pt):
+    if pt == end:
         return 0
-    if name == "A":
-        product = 1
-        for lo, hi in ranges.values():
-            product *= hi - lo + 1
-        return product
-    
-    rules, fallback = workflows[name]
 
-    total = 0
+    m = -float("inf")
 
-    for key, cmp, n, target in rules:
-        lo, hi = ranges[key]
-        if cmp == "<":
-            T = (lo, n - 1)
-            F = (n, hi)
-        else:
-            T = (n + 1, hi)
-            F = (lo, n)
-        if T[0] <= T[1]:
-            copy = dict(ranges)
-            copy[key] = T
-            total += count(copy, target)
-        if F[0] <= F[1]:
-            ranges = dict(ranges)
-            ranges[key] = F
-        else:
-            break
-    else:
-        total += count(ranges, fallback)
-            
-    return total
+    seen.add(pt)
+    for nx in graph[pt]:
+        if nx not in seen:
+            m = max(m, dfs(nx) + graph[pt][nx])
+    seen.remove(pt)
 
-print(count({key: (1, 4000) for key in "xmas"}))
+    return m
+
+print(dfs(start))
