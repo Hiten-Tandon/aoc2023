@@ -23,6 +23,7 @@ dependencies = [
  "itertools",
  "num",
  "rayon",
+ "rusymbols",
 ]
 
 [[package]]
@@ -229,6 +230,12 @@ dependencies = [
  "crossbeam-deque",
  "crossbeam-utils",
 ]
+
+[[package]]
+name = "rusymbols"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0c608f5fc6985d9c3fa5d1f2826004cf7cf79d7037dbcf2a60278d15d98fc1f3"
 
 [[package]]
 name = "syn"

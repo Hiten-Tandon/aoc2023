@@ -30,6 +30,7 @@ pub mod day21;
 pub mod day22;
 pub mod day23;
 pub mod day24;
+pub mod day25;
 
 use crate::{
     day01::{sum_correct_purified_data, sum_purified_data},
@@ -57,7 +58,8 @@ use crate::{
     day21::{step_counter_for_chad_elf, step_counter_for_elf},
     day22::count_destructable_blocks,
     day23::{get_longest_hike_route_length, get_longest_hike_route_length_without_slopes},
-    day24::count_intersections_of_hailstone_trajectories,
+    day24::{count_intersections_of_hailstone_trajectories, get_stone_position},
+    day25::get_end_cycle_joining_combinations,
 };
 
 fn main() -> Result<(), ()> {
@@ -124,6 +126,8 @@ fn main() -> Result<(), ()> {
         "23 1" => println!("{}", get_longest_hike_route_length(&f_cont)),
         "23 2" => println!("{}", get_longest_hike_route_length_without_slopes(&f_cont)),
         "24 1" => println!("{}", count_intersections_of_hailstone_trajectories(&f_cont)),
+        "24 2" => println!("{}", get_stone_position(&f_cont)),
+        "25 1" => println!("{}", get_end_cycle_joining_combinations(&f_cont)),
         _ => unreachable!(),
     }
 

@@ -10,6 +10,7 @@ ahash = "0.8.6"
 itertools = "0.12.0"
 num = "0.4.1"
 rayon = "1.8.0"
+rusymbols = "0.1.2"
 
 [profile.dev]
 overflow-checks = false
